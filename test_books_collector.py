@@ -1,4 +1,5 @@
 import pytest
+from _pytest import mark
 
 
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
@@ -46,10 +47,11 @@ class TestBooksCollector:
         collector.set_book_genre('Восточный экспресс. Путеводитель', 'Детективы')
         assert len(collector.get_books_with_specific_genre('Ужасы')) == 2
 
-    def test_get_books_genre_existing_genre(self, collector):
+    @pytest.mark.parametrize('genre', ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии'])
+    def test_get_books_genre_one_book(self, collector, genre):
         collector.add_new_book('Гуси-Лебеди')
-        collector.set_book_genre('Гуси-Лебеди', 'Мультфильмы')
-        assert collector.get_books_genre()['Гуси-Лебеди'] == 'Мультфильмы'
+        collector.set_book_genre('Гуси-Лебеди', genre)
+        assert collector.get_books_genre()['Гуси-Лебеди'] == genre
 
     @pytest.mark.parametrize('adult_genre,children_genre',
                              [['Ужасы', 'Фантастика'], ['Детективы', 'Мультфильмы'], ['Ужасы', 'Комедии']])
@@ -60,7 +62,7 @@ class TestBooksCollector:
         collector.set_book_genre('Сияние', adult_genre)
         assert len(collector.get_books_for_children()) == 1
 
-    def test_add_book_in_favorites_add_new_book(self, collector):
+    def test_add_book_in_favorites_add_one_book(self, collector):
         collector.add_new_book('Репка')
         collector.add_book_in_favorites('Репка')
         assert len(collector.favorites) == 1
