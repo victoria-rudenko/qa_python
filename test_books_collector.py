@@ -81,3 +81,10 @@ class TestBooksCollector:
         collector.add_book_in_favorites('1984')
         collector.add_book_in_favorites('Дюна')
         assert len(collector.get_list_of_favorites_books()) == len(collector.favorites)
+
+    def test_get_books_genre_two_books(self, collector):
+        collector.add_new_book('И не осталось никого')
+        collector.add_new_book('Вий')
+        assert (len(collector.get_books_genre()) == 2
+                and 'И не осталось никого' in collector.get_books_genre().keys()
+                and 'Вий' in collector.get_books_genre().keys())

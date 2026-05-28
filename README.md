@@ -11,5 +11,6 @@
 - test_add_book_in_favorites_add_one_book. Проверка работы метода add_book_in_favorites класса BooksCollector для кейса добавления одной книги в избранное.
 - test_delete_book_from_favorites_one_book. Проверка работы метода delete_book_from_favorites класса BooksCollector для кейса удаления одной книги из избранного.
 - test_get_list_of_favorites_books_two_books. Проверка работы метода get_list_of_favorites_books класса BooksCollector для кейса получения списка избранного из двух книг.
+- test_get_books_genre_two_books. Проверка работы метода get_books_genre класса BooksCollector для кейса получения словаря books_genre с двумя книгами в нем.
     
 В каждом тесте создаётся отдельный экземпляр класса BooksCollector(). Это реализовано с помощью фикстуры, сохранённой в файле conftest.py.
